@@ -141,7 +141,7 @@
     const endpoint=String((window.RR_MOBILE_CONFIG||{}).SCRIPT_URL||'').trim();
     if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:[?#].*)?$/.test(endpoint)){if(!quiet)toast('يلزم إعداد رابط Apps Script في ملف config.js.',true);return;}
     const requestId=rrRequestId();
-    const timer=setTimeout(()=>{const call=rrPendingCalls.get(requestId);if(!call)return;rrPendingCalls.delete(requestId);if(!call.quiet)toast('انتهت مهلة الاتصال بالخادم. تحقق من رابط التطبيق وإعداد RR_PWA_ORIGIN ثم حاول مجددًا.',true);},45000);
+    const timer=setTimeout(()=>{const call=rrPendingCalls.get(requestId);if(!call)return;rrPendingCalls.delete(requestId);if(!call.quiet)toast('انتهت مهلة الاتصال بالخادم. تحقق من رابط التطبيق وإعداد RR_PWA_ORIGIN ثم حاول مجددًا.',true);},90000);
     rrPendingCalls.set(requestId,{onSuccess:onSuccess,quiet:quiet,timer:timer});
     $('rrRequestId').value=requestId;
     $('rrPayload').value=JSON.stringify({requestId:requestId,method:name,args:Array.isArray(args)?args:[],origin:location.origin});
