@@ -1,12 +1,12 @@
-const CACHE_NAME = 'restaurant-reservations-shell-v1';
+const CACHE_NAME = 'restaurant-reservations-shell-v2';
 const APP_SHELL = [
   './',
   './index.html',
   './config.js',
   './manifest.webmanifest',
-  './icons/icon-192.png',
-  './icons/icon-512.png',
-  './icons/icon-maskable-512.png'
+  './icon-192.png',
+  './icon-512.png',
+  './icon-maskable-512.png'
 ];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(APP_SHELL)).then(() => self.skipWaiting()));
