@@ -18,17 +18,10 @@
     *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:var(--text);line-height:1.5}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:700}button:disabled{opacity:.5;cursor:not-allowed}.primary{background:var(--blue);color:#fff}.accent{background:var(--orange);color:#162536}.secondary{background:#eaf0f5;color:var(--navy)}.danger{background:#fff0ef;color:var(--red)}.small{padding:6px 9px;font-size:12px;border-radius:8px}.wrap{max-width:1200px;margin:auto;padding:18px}.hidden{display:none!important}.topbar{background:var(--navy);color:white;padding:15px 20px;box-shadow:var(--shadow)}.topinner{max-width:1200px;margin:auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{display:flex;gap:10px;align-items:center;font-weight:800;font-size:19px}.brandmark{background:var(--orange);color:var(--navy);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:20px}.userbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.userbox span{font-size:13px;color:#e5edf4}.nav{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.nav button{background:#e6edf3;color:var(--navy)}.nav button.active{background:var(--orange);color:#142d42}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.col-12{grid-column:span 12}.col-8{grid-column:span 8}.col-6{grid-column:span 6}.col-4{grid-column:span 4}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.card h2,.card h3{margin:0 0 14px;color:var(--navy)}h1{font-size:22px;margin:0 0 5px}h2{font-size:18px}h3{font-size:15px}.muted{color:var(--muted);font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#34495e}input,select,textarea{width:100%;border:1px solid #cfd9e3;border-radius:10px;padding:11px;background:white;color:var(--text);outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,91,122,.12)}textarea{min-height:80px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.sectionhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:15px}.bookinglist{display:grid;gap:10px}.booking{border:1px solid var(--line);border-radius:13px;padding:14px;background:white;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.booking h3{font-size:15px;margin:0 0 5px}.details{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:13px;color:#4b5d70}.notes{font-size:13px;margin-top:7px;white-space:pre-wrap;overflow-wrap:anywhere}.badge{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:4px 8px;background:#e6f6ed;color:var(--green)}.badge.cancelled{background:#fff0ef;color:var(--red)}.bookingbuttons{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}.stat strong{display:block;font-size:25px;color:var(--blue)}.stat span{font-size:12px;color:var(--muted)}.tablewrap{overflow:auto;max-width:100%}table{border-collapse:collapse;width:100%;font-size:12px;min-width:620px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:#eff4f8;color:var(--navy);white-space:nowrap}td{overflow-wrap:anywhere}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #c7d3df;border-radius:12px}.toast{position:fixed;bottom:18px;left:18px;max-width:min(450px,calc(100vw - 36px));background:#17324d;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:99;font-size:13px}.toast.error{background:#8e211a}.login{max-width:480px;margin:7vh auto;padding:0 15px}.login .card{padding:26px}.login-logo{display:flex;gap:12px;align-items:center;margin-bottom:20px}.hint{background:#fff8e9;border:1px solid #f4d8a5;padding:11px;border-radius:10px;color:#75511a;font-size:12px}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.divider{border:0;border-top:1px solid var(--line);margin:18px 0}.loading{opacity:.6;pointer-events:none}.footer{color:var(--muted);font-size:11px;text-align:center;padding:25px 0 10px}
     @media(max-width:760px){.wrap{padding:12px}.col-8,.col-6,.col-4{grid-column:span 12}.formgrid,.split{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr);gap:7px}.stat{padding:10px}.stat strong{font-size:20px}.booking{grid-template-columns:1fr}.bookingbuttons{justify-content:flex-start}.topinner{align-items:flex-start}.brand{font-size:16px}.userbox{width:100%}.card{padding:14px}}
     .pwa-install-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:120;box-shadow:0 10px 28px rgba(23,50,77,.25);border-radius:999px;padding:12px 18px}
-    .bridge-frame{position:fixed;left:-20px;bottom:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none}
-    .bridge-form{position:fixed;left:-20px;bottom:0;width:1px;height:1px;overflow:hidden}
     @media(max-width:760px){body{padding-bottom:env(safe-area-inset-bottom)}.topbar{padding-top:calc(12px + env(safe-area-inset-top))}.nav{position:sticky;top:0;z-index:50;background:var(--bg);padding:8px 0;margin:8px 0 14px}.nav button{flex:1;min-width:max-content}.sectionhead .muted{max-width:100%}.bookingbuttons button{min-height:40px}.actions button{min-height:42px}}
   </style>
 </head>
 <body>
-  <form id="rrApiForm" class="bridge-form" method="post" target="rrApiFrame" accept-charset="UTF-8">
-    <input id="rrRequestId" type="hidden" name="rrRequestId" value="">
-    <input id="rrPayload" type="hidden" name="rrPayload" value="">
-  </form>
-  <iframe class="bridge-frame" name="rrApiFrame" id="rrApiFrame" title="قناة اتصال آمنة بخادم الحجوزات"></iframe>
   <button id="installPwaBtn" class="primary pwa-install-btn hidden" type="button">＋ تثبيت التطبيق</button>
   <div id="toast" class="toast hidden" role="status"></div>
 
@@ -120,23 +113,8 @@
   const RR_ALLOWED_API = new Set(['apiGoogleMobileLogin','apiSendMobileAppLink','apiLogout','apiGetData','apiCreateReservation','apiUpdateReservation','apiCancelReservation','apiCreateEmployee','apiResetEmployeePassword','apiSetEmployeeActive','apiCreateRestaurant','apiSetRestaurantActive','apiCreateMenu','apiSetMenuActive']);
   const rrPendingCalls = new Map();
   function rrRequestId(){return 'rr_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);}
-  function rpc(name,args,onSuccess,quiet=false){
-    if(!RR_ALLOWED_API.has(name)){if(!quiet)toast('عملية غير مسموح بها.',true);return;}
-    const endpoint=String((window.RR_MOBILE_CONFIG||{}).SCRIPT_URL||'').trim();
-    if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:[?#].*)?$/.test(endpoint)){if(!quiet)toast('يلزم إعداد رابط Apps Script في ملف config.js.',true);return;}
-    const requestId=rrRequestId();
-    const timer=setTimeout(()=>{const call=rrPendingCalls.get(requestId);if(!call)return;rrPendingCalls.delete(requestId);if(call.name==='apiGoogleMobileLogin'){rrGoogleLoginBusy=false;sessionStorage.removeItem('rr_google_nonce');setTimeout(()=>initGoogleSignIn(false),100);}if(!call.quiet)toast('تأخر رد الخادم. تحقق من رابط Apps Script وإعدادات النشر ثم أعد المحاولة.',true);},90000);
-    rrPendingCalls.set(requestId,{name:name,onSuccess:onSuccess,quiet:quiet,timer:timer});
-    $('rrRequestId').value=requestId;
-    $('rrPayload').value=JSON.stringify({requestId:requestId,method:name,args:Array.isArray(args)?args:[],origin:location.origin});
-    $('rrApiForm').action=endpoint;
-    HTMLFormElement.prototype.submit.call($('rrApiForm'));
-  }
-  window.addEventListener('message',event=>{
-    let host='';try{host=new URL(event.origin).hostname.toLowerCase();}catch(_){return;}
-    const isGoogleApiOrigin=host==='script.google.com'||host==='script.googleusercontent.com'||host.endsWith('.script.googleusercontent.com');
-    if(!isGoogleApiOrigin)return;
-    const msg=event.data;if(!msg||msg.type!=='RR_PWA_RPC_RESPONSE'||!msg.requestId)return;
+  function handleApiResponse(msg){
+    if(!msg || msg.type!=='RR_PWA_RPC_RESPONSE' || !msg.requestId)return;
     const call=rrPendingCalls.get(msg.requestId);if(!call)return;
     clearTimeout(call.timer);rrPendingCalls.delete(msg.requestId);
     if(msg.ok){if(call.onSuccess)call.onSuccess(msg.result);return;}
@@ -144,7 +122,37 @@
     if(call.name==='apiGoogleMobileLogin'){rrGoogleLoginBusy=false;sessionStorage.removeItem('rr_google_nonce');setTimeout(()=>initGoogleSignIn(false),100);}
     if(!call.quiet)toast(text,true);
     if(text.includes('انتهت جلسة الدخول')||text.includes('الحساب غير نشط'))logout(false);
-  });
+  }
+  function rpc(name,args,onSuccess,quiet=false){
+    if(!RR_ALLOWED_API.has(name)){if(!quiet)toast('عملية غير مسموح بها.',true);return;}
+    const cfg=window.RR_MOBILE_CONFIG||{};
+    const endpoint=String(cfg.API_PROXY_URL||'').trim();
+    if(!/^https:\/\/[a-z0-9.-]+\.workers\.dev(?:\/[a-zA-Z0-9._~!$&'()*+,;=:@%\/-]*)?$/i.test(endpoint)){
+      if(!quiet)toast('لم يتم إعداد API_PROXY_URL في ملف config.js. راجع دليل الربط.',true);return;
+    }
+    const requestId=rrRequestId();
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),45000);
+    rrPendingCalls.set(requestId,{name:name,onSuccess:onSuccess,quiet:quiet,timer:timer,controller:controller});
+    const payload={requestId:requestId,method:name,args:Array.isArray(args)?args:[],origin:location.origin};
+    fetch(endpoint,{method:'POST',mode:'cors',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:controller.signal})
+      .then(async response=>{
+        const text=await response.text();
+        let data=null;try{data=JSON.parse(text);}catch(_){throw new Error('تعذر قراءة رد الخادم. تأكد من إعداد Cloudflare Worker ورابط Apps Script.');}
+        if(!response.ok && !data.type)throw new Error(data.error||('خطأ HTTP '+response.status));
+        return data;
+      })
+      .then(handleApiResponse)
+      .catch(err=>{
+        const call=rrPendingCalls.get(requestId);if(!call)return;
+        clearTimeout(call.timer);rrPendingCalls.delete(requestId);
+        if(name==='apiGoogleMobileLogin'){rrGoogleLoginBusy=false;sessionStorage.removeItem('rr_google_nonce');setTimeout(()=>initGoogleSignIn(false),100);}
+        if(!quiet){
+          const msg=err&&err.name==='AbortError'?'انتهت مهلة الاتصال. تحقق من نشر Worker ورابط Apps Script ثم حاول مجددًا.':String(err&&err.message||err||'تعذر الاتصال بالخادم.');
+          toast(msg,true);
+        }
+      });
+  }
   function showOnly(screen){['loginScreen','appScreen'].forEach(id=>$(id).classList.toggle('hidden',id!==screen));}
   function logout(showMessage=true){if(token)rpc('apiLogout',[token],()=>{},true);token='';appData=null;localStorage.removeItem('rr_mobile_token');if(showMessage){localStorage.setItem('rr_mobile_manual_logout','1');if(window.google&&google.accounts&&google.accounts.id)google.accounts.id.disableAutoSelect();}else{localStorage.removeItem('rr_mobile_manual_logout');}showOnly('loginScreen');if(showMessage)toast('تم تسجيل الخروج. اضغط Continue with Google للدخول مرة أخرى.');else setTimeout(()=>initGoogleSignIn(false),100);}
   let rrGoogleLoginBusy=false;
