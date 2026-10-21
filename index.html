@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17324d">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="حجوزات المطاعم">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <script src="./config.js"></script>
+  <style>
+    :root{--navy:#17324d;--blue:#245b7a;--orange:#f28c28;--bg:#f4f7fa;--card:#fff;--text:#1f2937;--muted:#687789;--line:#e1e8ef;--red:#b42318;--green:#18794e;--shadow:0 8px 24px rgba(23,50,77,.07)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,Tahoma,sans-serif;color:var(--text);line-height:1.5}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;border-radius:10px;padding:10px 14px;font-weight:700}button:disabled{opacity:.5;cursor:not-allowed}.primary{background:var(--blue);color:#fff}.accent{background:var(--orange);color:#162536}.secondary{background:#eaf0f5;color:var(--navy)}.danger{background:#fff0ef;color:var(--red)}.small{padding:6px 9px;font-size:12px;border-radius:8px}.wrap{max-width:1200px;margin:auto;padding:18px}.hidden{display:none!important}.topbar{background:var(--navy);color:white;padding:15px 20px;box-shadow:var(--shadow)}.topinner{max-width:1200px;margin:auto;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.brand{display:flex;gap:10px;align-items:center;font-weight:800;font-size:19px}.brandmark{background:var(--orange);color:var(--navy);width:40px;height:40px;border-radius:12px;display:grid;place-items:center;font-weight:900;font-size:20px}.userbox{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.userbox span{font-size:13px;color:#e5edf4}.nav{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.nav button{background:#e6edf3;color:var(--navy)}.nav button.active{background:var(--orange);color:#142d42}.grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.col-12{grid-column:span 12}.col-8{grid-column:span 8}.col-6{grid-column:span 6}.col-4{grid-column:span 4}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow);min-width:0}.card h2,.card h3{margin:0 0 14px;color:var(--navy)}h1{font-size:22px;margin:0 0 5px}h2{font-size:18px}h3{font-size:15px}.muted{color:var(--muted);font-size:13px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}label{font-size:13px;font-weight:700;color:#34495e}input,select,textarea{width:100%;border:1px solid #cfd9e3;border-radius:10px;padding:11px;background:white;color:var(--text);outline:none}input:focus,select:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(36,91,122,.12)}textarea{min-height:80px;resize:vertical}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.sectionhead{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px}.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin-bottom:15px}.bookinglist{display:grid;gap:10px}.booking{border:1px solid var(--line);border-radius:13px;padding:14px;background:white;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px}.booking h3{font-size:15px;margin:0 0 5px}.details{display:flex;gap:8px 14px;flex-wrap:wrap;font-size:13px;color:#4b5d70}.notes{font-size:13px;margin-top:7px;white-space:pre-wrap;overflow-wrap:anywhere}.badge{display:inline-block;font-size:11px;font-weight:800;border-radius:999px;padding:4px 8px;background:#e6f6ed;color:var(--green)}.badge.cancelled{background:#fff0ef;color:var(--red)}.bookingbuttons{display:flex;gap:6px;align-items:flex-start;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}.stat{background:white;border:1px solid var(--line);border-radius:14px;padding:14px}.stat strong{display:block;font-size:25px;color:var(--blue)}.stat span{font-size:12px;color:var(--muted)}.tablewrap{overflow:auto;max-width:100%}table{border-collapse:collapse;width:100%;font-size:12px;min-width:620px}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}th{background:#eff4f8;color:var(--navy);white-space:nowrap}td{overflow-wrap:anywhere}.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed #c7d3df;border-radius:12px}.toast{position:fixed;bottom:18px;left:18px;max-width:min(450px,calc(100vw - 36px));background:#17324d;color:#fff;padding:13px 16px;border-radius:12px;box-shadow:var(--shadow);z-index:99;font-size:13px}.toast.error{background:#8e211a}.login{max-width:480px;margin:7vh auto;padding:0 15px}.login .card{padding:26px}.login-logo{display:flex;gap:12px;align-items:center;margin-bottom:20px}.hint{background:#fff8e9;border:1px solid #f4d8a5;padding:11px;border-radius:10px;color:#75511a;font-size:12px}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}.divider{border:0;border-top:1px solid var(--line);margin:18px 0}.loading{opacity:.6;pointer-events:none}.footer{color:var(--muted);font-size:11px;text-align:center;padding:25px 0 10px}
+    @media(max-width:760px){.wrap{padding:12px}.col-8,.col-6,.col-4{grid-column:span 12}.formgrid,.split{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr);gap:7px}.stat{padding:10px}.stat strong{font-size:20px}.booking{grid-template-columns:1fr}.bookingbuttons{justify-content:flex-start}.topinner{align-items:flex-start}.brand{font-size:16px}.userbox{width:100%}.card{padding:14px}}
+    .pwa-install-btn{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:120;box-shadow:0 10px 28px rgba(23,50,77,.25);border-radius:999px;padding:12px 18px}
+    .bridge-frame{position:fixed;left:-20px;bottom:0;width:1px;height:1px;border:0;opacity:0;pointer-events:none}
+    .bridge-form{position:fixed;left:-20px;bottom:0;width:1px;height:1px;overflow:hidden}
+    @media(max-width:760px){body{padding-bottom:env(safe-area-inset-bottom)}.topbar{padding-top:calc(12px + env(safe-area-inset-top))}.nav{position:sticky;top:0;z-index:50;background:var(--bg);padding:8px 0;margin:8px 0 14px}.nav button{flex:1;min-width:max-content}.sectionhead .muted{max-width:100%}.bookingbuttons button{min-height:40px}.actions button{min-height:42px}}
+  </style>
+</head>
+<body>
+  <form id="rrApiForm" class="bridge-form" method="post" target="rrApiFrame" accept-charset="UTF-8">
+    <input id="rrRequestId" type="hidden" name="rrRequestId" value="">
+    <input id="rrPayload" type="hidden" name="rrPayload" value="">
+  </form>
+  <iframe class="bridge-frame" name="rrApiFrame" id="rrApiFrame" title="قناة اتصال آمنة بخادم الحجوزات"></iframe>
+  <button id="installPwaBtn" class="primary pwa-install-btn hidden" type="button">＋ تثبيت التطبيق</button>
+  <div id="toast" class="toast hidden" role="status"></div>
+
+  <section id="loginScreen" class="login">
+    <div class="card">
+      <div class="login-logo"><div class="brandmark">R</div><div><h1>نظام حجوزات المطاعم</h1><div class="muted">تسجيل دخول الموظفين</div></div></div>
+      <form id="loginForm">
+        <div class="field"><label for="loginId">الرقم الوظيفي</label><input id="loginId" autocomplete="username" required maxlength="40" placeholder="أدخل الرقم الوظيفي"></div>
+        <div class="field" style="margin-top:12px"><label for="loginPassword">كلمة المرور</label><input id="loginPassword" type="password" autocomplete="current-password" required></div>
+        <div class="actions"><button class="primary" type="submit" style="width:100%">تسجيل الدخول</button></div>
+      </form>
+      <p class="muted" style="margin-top:16px">إذا تعذر الدخول، تواصل مع مسؤول النظام لإعادة تعيين كلمة المرور أو تفعيل الحساب.</p>
+    </div>
+  </section>
+
+  <section id="passwordScreen" class="login hidden">
+    <div class="card">
+      <div class="login-logo"><div class="brandmark">🔐</div><div><h1>تغيير كلمة المرور</h1><div class="muted">يلزم تغيير كلمة المرور الأولية قبل المتابعة</div></div></div>
+      <form id="passwordForm">
+        <div class="field"><label for="oldPassword">كلمة المرور الحالية</label><input id="oldPassword" type="password" autocomplete="current-password" required></div>
+        <div class="field" style="margin-top:12px"><label for="newPassword">كلمة المرور الجديدة (10 أحرف على الأقل)</label><input id="newPassword" type="password" autocomplete="new-password" minlength="10" required></div>
+        <div class="field" style="margin-top:12px"><label for="confirmPassword">تأكيد كلمة المرور</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="10" required></div>
+        <div class="actions"><button class="primary" type="submit">حفظ كلمة المرور</button><button class="secondary" type="button" onclick="logout()">خروج</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="appScreen" class="hidden">
+    <header class="topbar"><div class="topinner"><div class="brand"><div class="brandmark">R</div><div><div>نظام حجوزات المطاعم</div><div style="font-size:11px;font-weight:400;color:#d4e1ec">إدارة الحجوزات من الكمبيوتر والموبايل</div></div></div><div class="userbox"><span id="userLabel"></span><button class="secondary small" onclick="openPasswordChange()">تغيير كلمة المرور</button><button class="danger small" onclick="logout()">تسجيل الخروج</button></div></div></header>
+    <main class="wrap">
+      <div class="nav">
+        <button id="navBookings" class="active" onclick="showTab('bookings')">الحجوزات</button>
+        <button id="navNew" onclick="newReservation()">＋ حجز جديد</button>
+        <button id="navAdmin" class="hidden" onclick="showTab('admin')">إدارة النظام</button>
+      </div>
+
+      <section id="bookingsTab">
+        <div class="stats">
+          <div class="stat"><strong id="statToday">0</strong><span>حجوزات اليوم</span></div>
+          <div class="stat"><strong id="statUpcoming">0</strong><span>حجوزات قادمة مؤكدة</span></div>
+          <div class="stat"><strong id="statGuests">0</strong><span>الأشخاص في الحجوزات القادمة</span></div>
+        </div>
+        <div class="grid">
+          <div class="col-12 card">
+            <div class="sectionhead"><div><h2 style="margin-bottom:3px">قائمة الحجوزات</h2><div class="muted">البيانات المشتركة لجميع الموظفين المصرح لهم</div></div><button class="accent" onclick="newReservation()">＋ إنشاء حجز</button></div>
+            <div class="filters"><input id="searchBookings" placeholder="بحث برقم الحجز أو المطعم أو المنيو أو الملاحظات" oninput="renderBookings()"><input id="filterDate" type="date" aria-label="تصفية بالتاريخ" onchange="renderBookings()"><select id="filterStatus" onchange="renderBookings()"><option value="ALL">كل الحالات</option><option value="CONFIRMED">مؤكد</option><option value="CANCELLED">ملغى</option></select></div>
+            <div id="bookingList" class="bookinglist"></div>
+          </div>
+          <div id="bookingEditorCard" class="col-12 card hidden">
+            <div class="sectionhead"><div><h2 id="bookingEditorTitle">حجز جديد</h2><div class="muted">أدخل بيانات الحجز ثم اضغط حفظ.</div></div><button class="secondary small" type="button" onclick="resetBookingForm()">إغلاق</button></div>
+            <form id="bookingForm">
+              <input id="bookingId" type="hidden"><input id="bookingVersion" type="hidden">
+              <div class="formgrid">
+                <div class="field"><label for="bookingDate">تاريخ الحجز</label><input id="bookingDate" type="date" required></div>
+                <div class="field"><label for="bookingTime">وقت الحجز</label><input id="bookingTime" type="time" required></div>
+                <div class="field"><label for="bookingRestaurant">المطعم / المكان</label><select id="bookingRestaurant" required><option value="">اختر المطعم</option></select></div>
+                <div class="field"><label for="bookingMenu">المنيو</label><select id="bookingMenu" required><option value="">اختر المنيو</option></select></div>
+                <div class="field"><label for="bookingGuests">عدد الأشخاص</label><input id="bookingGuests" type="number" min="1" max="500" value="2" required></div>
+                <div class="field full"><label for="bookingNotes">ملاحظات خاصة</label><textarea id="bookingNotes" maxlength="1500" placeholder="الحساسية الغذائية، ترتيب الطاولة، طلبات خاصة..."></textarea></div>
+              </div>
+              <div class="actions"><button class="primary" type="submit">حفظ الحجز</button><button class="secondary" type="button" onclick="resetBookingForm()">إلغاء</button></div>
+              <div class="muted" style="margin-top:10px">سيصل إشعار بالبريد الإلكتروني للموظفين النشطين الذين أُضيفت عناوين بريدهم في النظام.</div>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section id="adminTab" class="hidden">
+        <div class="grid">
+          <div class="col-6 card">
+            <h2>إضافة موظف</h2>
+            <form id="employeeForm">
+              <div class="field"><label for="employeeId">الرقم الوظيفي</label><input id="employeeId" required maxlength="40"></div>
+              <div class="field" style="margin-top:10px"><label for="employeeName">اسم الموظف</label><input id="employeeName" required maxlength="100"></div>
+              <div class="field" style="margin-top:10px"><label for="employeeEmail">البريد الإلكتروني</label><input id="employeeEmail" type="email" required></div>
+              <div class="actions"><button class="primary" type="submit">إنشاء الحساب وإرسال كلمة مرور أولية</button></div>
+            </form>
+            <div class="muted" style="margin-top:9px">يجب تغيير كلمة المرور عند أول دخول. لن تُحفظ كلمة المرور كنص مكشوف.</div>
+          </div>
+          <div class="col-6 card">
+            <h2>إضافة مطعم أو مكان</h2>
+            <form id="restaurantForm"><div class="field"><label for="restaurantName">اسم المطعم</label><input id="restaurantName" maxlength="100" required></div><div class="actions"><button class="primary" type="submit">إضافة المطعم</button></div></form>
+            <hr class="divider">
+            <h3>إضافة منيو لمطعم</h3>
+            <form id="menuForm"><div class="field"><label for="menuRestaurant">المطعم</label><select id="menuRestaurant" required></select></div><div class="field" style="margin-top:10px"><label for="menuName">اسم المنيو</label><input id="menuName" maxlength="100" required></div><div class="actions"><button class="primary" type="submit">إضافة المنيو</button></div></form>
+          </div>
+          <div class="col-12 card"><div class="sectionhead"><h2>حسابات الموظفين</h2><button class="secondary small" onclick="loadData()">تحديث القائمة</button></div><div id="employeeTable" class="tablewrap"></div></div>
+          <div class="col-6 card"><h2>المطاعم</h2><div id="restaurantTable" class="tablewrap"></div></div>
+          <div class="col-6 card"><h2>المنيوهات</h2><div id="menuTable" class="tablewrap"></div></div>
+          <div class="col-12 card"><h2>سجل الإشعارات</h2><div class="muted" style="margin-bottom:10px">تظهر حالة الإرسال أو آخر خطأ للمراجعة.</div><div id="queueTable" class="tablewrap"></div></div>
+          <div class="col-12 card"><h2>سجل العمليات</h2><div id="auditTable" class="tablewrap"></div></div>
+        </div>
+      </section>
+      <div class="footer">النظام يستخدم Google Sheets كمخزن بيانات. تصل الإشعارات في هذه النسخة عبر البريد الإلكتروني. لا تشارك ملف Google Sheet مع الموظفين؛ شارك رابط تطبيق الويب فقط.</div>
+    </main>
+  </section>
+
+<script>
+  let token = sessionStorage.getItem('rr_token') || '';
+  let appData = null;
+  let forcePassword = false;
+  let toastTimer = null;
+  const $ = id => document.getElementById(id);
+  function esc(v){return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+  function toast(message, isError=false){const el=$('toast');el.textContent=message;el.classList.remove('hidden','error');if(isError)el.classList.add('error');if(toastTimer)clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),6000);}
+  const RR_ALLOWED_API = new Set(['apiLogin','apiLogout','apiChangePassword','apiGetData','apiCreateReservation','apiUpdateReservation','apiCancelReservation','apiCreateEmployee','apiResetEmployeePassword','apiSetEmployeeActive','apiCreateRestaurant','apiSetRestaurantActive','apiCreateMenu','apiSetMenuActive']);
+  const rrPendingCalls = new Map();
+  function rrRequestId(){return 'rr_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);}
+  function rpc(name,args,onSuccess,quiet=false){
+    if(!RR_ALLOWED_API.has(name)){if(!quiet)toast('عملية غير مسموح بها.',true);return;}
+    const endpoint=String((window.RR_MOBILE_CONFIG||{}).SCRIPT_URL||'').trim();
+    if(!/^https:\/\/script\.google\.com\/macros\/s\/.+\/exec(?:[?#].*)?$/.test(endpoint)){if(!quiet)toast('يلزم إعداد رابط Apps Script في ملف config.js.',true);return;}
+    const requestId=rrRequestId();
+    const timer=setTimeout(()=>{const call=rrPendingCalls.get(requestId);if(!call)return;rrPendingCalls.delete(requestId);if(!call.quiet)toast('انتهت مهلة الاتصال بالخادم. تحقق من رابط التطبيق وإعداد RR_PWA_ORIGIN ثم حاول مجددًا.',true);},45000);
+    rrPendingCalls.set(requestId,{onSuccess:onSuccess,quiet:quiet,timer:timer});
+    $('rrRequestId').value=requestId;
+    $('rrPayload').value=JSON.stringify({requestId:requestId,method:name,args:Array.isArray(args)?args:[],origin:location.origin});
+    $('rrApiForm').action=endpoint;
+    HTMLFormElement.prototype.submit.call($('rrApiForm'));
+  }
+  window.addEventListener('message',event=>{
+    let host='';try{host=new URL(event.origin).hostname.toLowerCase();}catch(_){return;}
+    const isGoogleApiOrigin=host==='script.google.com'||host==='script.googleusercontent.com'||host.endsWith('.script.googleusercontent.com');
+    if(!isGoogleApiOrigin)return;
+    const msg=event.data;if(!msg||msg.type!=='RR_PWA_RPC_RESPONSE'||!msg.requestId)return;
+    const call=rrPendingCalls.get(msg.requestId);if(!call)return;
+    clearTimeout(call.timer);rrPendingCalls.delete(msg.requestId);
+    if(msg.ok){if(call.onSuccess)call.onSuccess(msg.result);return;}
+    const text=String(msg.error||'حدث خطأ غير متوقع');
+    if(!call.quiet)toast(text,true);
+    if(text.includes('انتهت جلسة الدخول')||text.includes('الحساب غير نشط'))logout(false);
+  });
+  function showOnly(screen){['loginScreen','passwordScreen','appScreen'].forEach(id=>$(id).classList.toggle('hidden',id!==screen));}
+  function logout(showMessage=true){if(token)rpc('apiLogout',[token],()=>{},true);token='';appData=null;sessionStorage.removeItem('rr_token');showOnly('loginScreen');$('loginPassword').value='';$('passwordForm').reset();if(showMessage)toast('تم تسجيل الخروج.');}
+  $('loginForm').addEventListener('submit',e=>{e.preventDefault();const id=$('loginId').value.trim(),pw=$('loginPassword').value;rpc('apiLogin',[id,pw],res=>{token=res.token;sessionStorage.setItem('rr_token',token);if(res.user.mustChangePassword){forcePassword=true;showOnly('passwordScreen');}else{forcePassword=false;loadData();}});});
+  $('passwordForm').addEventListener('submit',e=>{e.preventDefault();const old=$('oldPassword').value,nw=$('newPassword').value,cf=$('confirmPassword').value;if(nw!==cf){toast('كلمتا المرور غير متطابقتين.',true);return;}rpc('apiChangePassword',[token,old,nw],()=>{toast('تم تغيير كلمة المرور بنجاح.');$('passwordForm').reset();if(forcePassword){forcePassword=false;loadData();}else{showOnly('appScreen');}});});
+  function openPasswordChange(){forcePassword=false;$('passwordForm').reset();showOnly('passwordScreen');}
+  function loadData(){if(!token){showOnly('loginScreen');return;}rpc('apiGetData',[token],data=>{appData=data;showOnly('appScreen');$('userLabel').textContent=data.user.name+' · '+data.user.id+' · '+(data.user.role==='ADMIN'?'مسؤول':'موظف');$('navAdmin').classList.toggle('hidden',data.user.role!=='ADMIN');renderAll();});}
+  function showTab(tab){$('bookingsTab').classList.toggle('hidden',tab!=='bookings');$('adminTab').classList.toggle('hidden',tab!=='admin');$('navBookings').classList.toggle('active',tab==='bookings');$('navNew').classList.remove('active');$('navAdmin').classList.toggle('active',tab==='admin');if(tab==='admin'&&appData.user.role!=='ADMIN'){toast('هذه الصفحة للمسؤول فقط.',true);showTab('bookings');}}
+  function renderAll(){renderStats();fillBookingSelects();renderBookings();if(appData.user.role==='ADMIN')renderAdmin();if(!$('bookingDate').value)$('bookingDate').value=appData.today||new Date().toISOString().slice(0,10);}
+  function renderStats(){const today=appData.today||new Date().toISOString().slice(0,10);const active=appData.reservations.filter(r=>r.status==='CONFIRMED');const tod=active.filter(r=>r.date===today);const upcoming=active.filter(r=>(r.date+' '+r.time)>=(today+' 00:00'));$('statToday').textContent=tod.length;$('statUpcoming').textContent=upcoming.length;$('statGuests').textContent=upcoming.reduce((n,r)=>n+r.guests,0);}
+  function fillBookingSelects(){const restaurantOptions=(appData.restaurants||[]).map(r=>`<option value="${esc(r.id)}">${esc(r.name)}</option>`).join('');$('bookingRestaurant').innerHTML='<option value="">اختر المطعم</option>'+restaurantOptions;$('menuRestaurant').innerHTML='<option value="">اختر المطعم</option>'+((appData.allRestaurants||appData.restaurants||[]).filter(r=>r.active).map(r=>`<option value="${esc(r.id)}">${esc(r.name)}</option>`).join(''));refreshMenuOptions();$('bookingRestaurant').onchange=refreshMenuOptions;}
+  function refreshMenuOptions(selected=''){const restaurantId=$('bookingRestaurant').value;const menus=(appData.menus||[]).filter(m=>m.restaurantId===restaurantId);$('bookingMenu').innerHTML='<option value="">اختر المنيو</option>'+menus.map(m=>`<option value="${esc(m.id)}" ${m.id===selected?'selected':''}>${esc(m.name)}</option>`).join('');}
+  function renderBookings(){if(!appData)return;const q=$('searchBookings').value.trim().toLowerCase();const date=$('filterDate').value;const status=$('filterStatus').value;const rows=appData.reservations.filter(r=>{const text=[r.id,r.restaurantName,r.menuName,r.notes,r.createdBy].join(' ').toLowerCase();return(!q||text.includes(q))&&(!date||r.date===date)&&(status==='ALL'||r.status===status);});if(!rows.length){$('bookingList').innerHTML='<div class="empty">لا توجد حجوزات مطابقة للبحث.</div>';return;} $('bookingList').innerHTML=rows.map(r=>`<article class="booking"><div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><h3>${esc(r.restaurantName)} — ${esc(r.date)} ${esc(r.time)}</h3><span class="badge ${r.status==='CANCELLED'?'cancelled':''}">${r.status==='CANCELLED'?'ملغى':'مؤكد'}</span></div><div class="details"><span>رقم الحجز: <b>${esc(r.id)}</b></span><span>المنيو: ${esc(r.menuName)}</span><span>الأشخاص: ${esc(r.guests)}</span><span>أنشأه: ${esc(r.createdBy)}</span></div>${r.notes?`<div class="notes"><b>ملاحظات:</b> ${esc(r.notes)}</div>`:''}</div><div class="bookingbuttons">${r.status==='CONFIRMED'?`<button class="secondary small" data-action="edit" data-id="${esc(r.id)}">تعديل</button><button class="danger small" data-action="cancel" data-id="${esc(r.id)}" data-version="${esc(r.version)}">إلغاء</button>`:''}</div></article>`).join('');}
+  $('bookingList').addEventListener('click',e=>{const btn=e.target.closest('button[data-action]');if(!btn)return;const r=appData.reservations.find(x=>x.id===btn.dataset.id);if(!r)return;if(btn.dataset.action==='edit')editReservation(r);if(btn.dataset.action==='cancel')cancelReservation(r);});
+  function newReservation(){showTab('bookings');resetBookingForm();$('bookingEditorTitle').textContent='إنشاء حجز جديد';$('bookingEditorCard').classList.remove('hidden');$('navNew').classList.add('active');$('bookingDate').focus();}
+  function editReservation(r){showTab('bookings');$('bookingEditorCard').classList.remove('hidden');$('bookingEditorTitle').textContent='تعديل الحجز '+r.id;$('bookingId').value=r.id;$('bookingVersion').value=r.version;$('bookingDate').value=r.date;$('bookingTime').value=r.time;$('bookingRestaurant').value=r.restaurantId;refreshMenuOptions(r.menuId);$('bookingGuests').value=r.guests;$('bookingNotes').value=r.notes||'';$('bookingEditorCard').scrollIntoView({behavior:'smooth',block:'start'});}
+  function resetBookingForm(){ $('bookingForm').reset();$('bookingId').value='';$('bookingVersion').value='';$('bookingGuests').value=2;$('bookingEditorCard').classList.add('hidden');$('navNew').classList.remove('active');if(appData&&appData.today)$('bookingDate').value=appData.today;refreshMenuOptions();}
+  $('bookingForm').addEventListener('submit',e=>{e.preventDefault();const id=$('bookingId').value;const payload={id:id,version:Number($('bookingVersion').value),date:$('bookingDate').value,time:$('bookingTime').value,restaurantId:$('bookingRestaurant').value,menuId:$('bookingMenu').value,guests:Number($('bookingGuests').value),notes:$('bookingNotes').value};const method=id?'apiUpdateReservation':'apiCreateReservation';rpc(method,[token,payload],res=>{toast(id?'تم تحديث الحجز. أُدرج إشعار التعديل في الطابور.':'تم إنشاء الحجز. أُدرج إشعار الإنشاء في الطابور.');resetBookingForm();loadData();});});
+  function cancelReservation(r){if(!confirm('هل تريد إلغاء الحجز '+r.id+'؟ سيتم إيقاف التذكيرات القادمة.'))return;rpc('apiCancelReservation',[token,r.id,r.version],()=>{toast('تم إلغاء الحجز وإدراج إشعار الإلغاء.');loadData();});}
+  function renderAdmin(){renderEmployees();renderRestaurants();renderMenus();renderQueue();renderAudit();}
+  function renderEmployees(){const rows=appData.employees||[];if(!rows.length){$('employeeTable').innerHTML='<div class="empty">لا توجد حسابات.</div>';return;}$('employeeTable').innerHTML='<table><thead><tr><th>الرقم</th><th>الاسم</th><th>البريد</th><th>الحالة</th><th>كلمة المرور</th><th>إجراءات</th></tr></thead><tbody>'+rows.map(e=>`<tr><td>${esc(e.id)}</td><td>${esc(e.name)}</td><td>${esc(e.email)}</td><td>${e.active?'نشط':'معطل'}</td><td>${e.mustChangePassword?'يلزم تغييرها':'محدثة'}</td><td><button class="secondary small" data-emp-action="reset" data-id="${esc(e.id)}">إعادة تعيين</button> <button class="${e.active?'danger':'primary'} small" data-emp-action="toggle" data-id="${esc(e.id)}" data-active="${e.active?'1':'0'}">${e.active?'تعطيل':'تفعيل'}</button></td></tr>`).join('')+'</tbody></table>';}
+  $('employeeTable').addEventListener('click',e=>{const b=e.target.closest('button[data-emp-action]');if(!b)return;const id=b.dataset.id;if(b.dataset.empAction==='reset'){if(!confirm('إعادة تعيين كلمة مرور '+id+'؟'))return;rpc('apiResetEmployeePassword',[token,id],r=>{toast(r.message);if(r.temporaryPassword)alert('كلمة المرور المؤقتة (أرسلها يدويًا بطريقة آمنة):\n'+r.temporaryPassword);loadData();});}else{const active=b.dataset.active!=='1';if(!confirm((active?'تفعيل':'تعطيل')+' حساب '+id+'؟'))return;rpc('apiSetEmployeeActive',[token,id,active],()=>{toast('تم تحديث حالة الحساب.');loadData();});}});
+  function renderRestaurants(){const rows=appData.allRestaurants||[];const activeRows=rows.filter(r=>r.active);$('restaurantTable').innerHTML=rows.length?'<table><thead><tr><th>المطعم</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>'+rows.map(r=>`<tr><td>${esc(r.name)}</td><td>${r.active?'نشط':'متوقف'}</td><td><button class="${r.active?'danger':'primary'} small" data-rest-id="${esc(r.id)}" data-active="${r.active?'1':'0'}">${r.active?'إيقاف':'تفعيل'}</button></td></tr>`).join('')+'</tbody></table>':'<div class="empty">أضف أول مطعم.</div>';}
+  $('restaurantTable').addEventListener('click',e=>{const b=e.target.closest('button[data-rest-id]');if(!b)return;const active=b.dataset.active!=='1';rpc('apiSetRestaurantActive',[token,b.dataset.restId,active],()=>{toast('تم تحديث المطعم.');loadData();});});
+  function renderMenus(){const rows=appData.allMenus||[];$('menuTable').innerHTML=rows.length?'<table><thead><tr><th>المطعم</th><th>المنيو</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody>'+rows.map(m=>`<tr><td>${esc(m.restaurantName)}</td><td>${esc(m.name)}</td><td>${m.active?'نشط':'متوقف'}</td><td><button class="${m.active?'danger':'primary'} small" data-menu-id="${esc(m.id)}" data-active="${m.active?'1':'0'}">${m.active?'إيقاف':'تفعيل'}</button></td></tr>`).join('')+'</tbody></table>':'<div class="empty">أضف أول منيو.</div>';}
+  $('menuTable').addEventListener('click',e=>{const b=e.target.closest('button[data-menu-id]');if(!b)return;const active=b.dataset.active!=='1';rpc('apiSetMenuActive',[token,b.dataset.menuId,active],()=>{toast('تم تحديث المنيو.');loadData();});});
+  function renderQueue(){const rows=appData.notificationQueue||[];$('queueTable').innerHTML=rows.length?'<table><thead><tr><th>الوقت المجدول</th><th>الحجز</th><th>النوع</th><th>الحالة</th><th>المحاولات</th><th>الخطأ</th><th>الإرسال</th></tr></thead><tbody>'+rows.map(n=>`<tr><td>${esc(n.scheduledAt)}</td><td>${esc(n.reservationId)}</td><td>${esc(n.type)}</td><td>${esc(n.status)}</td><td>${esc(n.attempts)}</td><td>${esc(n.lastError)}</td><td>${esc(n.sentAt)}</td></tr>`).join('')+'</tbody></table>':'<div class="empty">لا توجد إشعارات مسجلة بعد.</div>';}
+  function renderAudit(){const rows=appData.recentAudit||[];$('auditTable').innerHTML=rows.length?'<table><thead><tr><th>الوقت</th><th>المستخدم</th><th>العملية</th><th>النوع</th><th>المعرّف</th><th>التفاصيل</th></tr></thead><tbody>'+rows.map(a=>`<tr><td>${esc(a.timestamp)}</td><td>${esc(a.actorId)}</td><td>${esc(a.action)}</td><td>${esc(a.entityType)}</td><td>${esc(a.entityId)}</td><td>${esc(a.details)}</td></tr>`).join('')+'</tbody></table>':'<div class="empty">لا توجد عمليات مسجلة بعد.</div>';}
+  $('employeeForm').addEventListener('submit',e=>{e.preventDefault();const payload={id:$('employeeId').value.trim(),name:$('employeeName').value.trim(),email:$('employeeEmail').value.trim()};rpc('apiCreateEmployee',[token,payload],r=>{toast(r.message);if(r.temporaryPassword)alert('كلمة المرور المؤقتة (سلّمها بطريقة آمنة):\n'+r.temporaryPassword);$('employeeForm').reset();loadData();});});
+  $('restaurantForm').addEventListener('submit',e=>{e.preventDefault();rpc('apiCreateRestaurant',[token,$('restaurantName').value.trim()],()=>{toast('تمت إضافة المطعم.');$('restaurantForm').reset();loadData();});});
+  $('menuForm').addEventListener('submit',e=>{e.preventDefault();rpc('apiCreateMenu',[token,$('menuRestaurant').value,$('menuName').value.trim()],()=>{toast('تمت إضافة المنيو.');$('menuForm').reset();loadData();});});
+  // استعادة الجلسة عند تحديث الصفحة؛ إذا انتهت الجلسة، سيُطلب تسجيل الدخول من جديد.
+  if(token){rpc('apiGetData',[token],data=>{appData=data;showOnly('appScreen');$('userLabel').textContent=data.user.name+' · '+data.user.id+' · '+(data.user.role==='ADMIN'?'مسؤول':'موظف');$('navAdmin').classList.toggle('hidden',data.user.role!=='ADMIN');renderAll();},true);}else{showOnly('loginScreen');}
+  let rrInstallPrompt=null;
+  const rrInstallButton=$('installPwaBtn');
+  window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();rrInstallPrompt=event;rrInstallButton.classList.remove('hidden');});
+  rrInstallButton.addEventListener('click',async()=>{if(!rrInstallPrompt){toast('من قائمة Chrome اختر Install app أو Add to Home screen.');return;}rrInstallPrompt.prompt();await rrInstallPrompt.userChoice;rrInstallPrompt=null;rrInstallButton.classList.add('hidden');});
+  window.addEventListener('appinstalled',()=>{rrInstallButton.classList.add('hidden');toast('تم تثبيت التطبيق على الجهاز.');});
+  if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
+</script>
+</body>
+</html>
