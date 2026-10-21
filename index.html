@@ -36,27 +36,15 @@
       <div class="login-logo"><div class="brandmark">R</div><div><h1>نظام حجوزات المطاعم</h1><div class="muted">تسجيل دخول الموظفين</div></div></div>
       <form id="loginForm">
         <div class="field"><label for="loginId">الرقم الوظيفي</label><input id="loginId" autocomplete="username" required maxlength="40" placeholder="أدخل الرقم الوظيفي"></div>
-        <div class="field" style="margin-top:12px"><label for="loginPassword">كلمة المرور</label><input id="loginPassword" type="password" autocomplete="current-password" required></div>
-        <div class="actions"><button class="primary" type="submit" style="width:100%">تسجيل الدخول</button></div>
+        <div class="field" style="margin-top:12px"><label for="mobileActivationCode">رمز تفعيل الموبايل</label><input id="mobileActivationCode" type="text" inputmode="text" autocomplete="one-time-code" autocapitalize="characters" spellcheck="false" maxlength="8" minlength="8" required placeholder="الرمز المرسل إلى بريدك"></div>
+        <div class="actions"><button class="primary" type="submit" style="width:100%">تفعيل هذا الجهاز</button></div>
       </form>
-      <p class="muted" style="margin-top:16px">إذا تعذر الدخول، تواصل مع مسؤول النظام لإعادة تعيين كلمة المرور أو تفعيل الحساب.</p>
-    </div>
-  </section>
-
-  <section id="passwordScreen" class="login hidden">
-    <div class="card">
-      <div class="login-logo"><div class="brandmark">🔐</div><div><h1>تغيير كلمة المرور</h1><div class="muted">يلزم تغيير كلمة المرور الأولية قبل المتابعة</div></div></div>
-      <form id="passwordForm">
-        <div class="field"><label for="oldPassword">كلمة المرور الحالية</label><input id="oldPassword" type="password" autocomplete="current-password" required></div>
-        <div class="field" style="margin-top:12px"><label for="newPassword">كلمة المرور الجديدة (10 أحرف على الأقل)</label><input id="newPassword" type="password" autocomplete="new-password" minlength="10" required></div>
-        <div class="field" style="margin-top:12px"><label for="confirmPassword">تأكيد كلمة المرور</label><input id="confirmPassword" type="password" autocomplete="new-password" minlength="10" required></div>
-        <div class="actions"><button class="primary" type="submit">حفظ كلمة المرور</button><button class="secondary" type="button" onclick="logout()">خروج</button></div>
-      </form>
+      <p class="muted" style="margin-top:16px">اطلب من المسؤول اختيار «إرسال رمز تفعيل تطبيق الموبايل» من قائمة Google Sheets. الرمز صالح لمدة 10 دقائق ويُستخدم مرة واحدة. بعد التفعيل، سيفتح التطبيق تلقائيًا على هذا الهاتف لمدة تصل إلى 30 يومًا.</p>
     </div>
   </section>
 
   <section id="appScreen" class="hidden">
-    <header class="topbar"><div class="topinner"><div class="brand"><div class="brandmark">R</div><div><div>نظام حجوزات المطاعم</div><div style="font-size:11px;font-weight:400;color:#d4e1ec">إدارة الحجوزات من الكمبيوتر والموبايل</div></div></div><div class="userbox"><span id="userLabel"></span><button class="secondary small" onclick="openPasswordChange()">تغيير كلمة المرور</button><button class="danger small" onclick="logout()">تسجيل الخروج</button></div></div></header>
+    <header class="topbar"><div class="topinner"><div class="brand"><div class="brandmark">R</div><div><div>نظام حجوزات المطاعم</div><div style="font-size:11px;font-weight:400;color:#d4e1ec">إدارة الحجوزات من الكمبيوتر والموبايل</div></div></div><div class="userbox"><span id="userLabel"></span><button class="danger small" onclick="logout()">تسجيل الخروج</button></div></div></header>
     <main class="wrap">
       <div class="nav">
         <button id="navBookings" class="active" onclick="showTab('bookings')">الحجوزات</button>
@@ -126,14 +114,13 @@
   </section>
 
 <script>
-  let token = sessionStorage.getItem('rr_token') || '';
+  let token = localStorage.getItem('rr_mobile_token') || '';
   let appData = null;
-  let forcePassword = false;
   let toastTimer = null;
   const $ = id => document.getElementById(id);
   function esc(v){return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
   function toast(message, isError=false){const el=$('toast');el.textContent=message;el.classList.remove('hidden','error');if(isError)el.classList.add('error');if(toastTimer)clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),6000);}
-  const RR_ALLOWED_API = new Set(['apiLogin','apiLogout','apiChangePassword','apiGetData','apiCreateReservation','apiUpdateReservation','apiCancelReservation','apiCreateEmployee','apiResetEmployeePassword','apiSetEmployeeActive','apiCreateRestaurant','apiSetRestaurantActive','apiCreateMenu','apiSetMenuActive']);
+  const RR_ALLOWED_API = new Set(['apiMobileActivate','apiLogout','apiGetData','apiCreateReservation','apiUpdateReservation','apiCancelReservation','apiCreateEmployee','apiResetEmployeePassword','apiSetEmployeeActive','apiCreateRestaurant','apiSetRestaurantActive','apiCreateMenu','apiSetMenuActive']);
   const rrPendingCalls = new Map();
   function rrRequestId(){return 'rr_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);}
   function rpc(name,args,onSuccess,quiet=false){
@@ -160,11 +147,9 @@
     if(!call.quiet)toast(text,true);
     if(text.includes('انتهت جلسة الدخول')||text.includes('الحساب غير نشط'))logout(false);
   });
-  function showOnly(screen){['loginScreen','passwordScreen','appScreen'].forEach(id=>$(id).classList.toggle('hidden',id!==screen));}
-  function logout(showMessage=true){if(token)rpc('apiLogout',[token],()=>{},true);token='';appData=null;sessionStorage.removeItem('rr_token');showOnly('loginScreen');$('loginPassword').value='';$('passwordForm').reset();if(showMessage)toast('تم تسجيل الخروج.');}
-  $('loginForm').addEventListener('submit',e=>{e.preventDefault();const id=$('loginId').value.trim(),pw=$('loginPassword').value;rpc('apiLogin',[id,pw],res=>{token=res.token;sessionStorage.setItem('rr_token',token);if(res.user.mustChangePassword){forcePassword=true;showOnly('passwordScreen');}else{forcePassword=false;loadData();}});});
-  $('passwordForm').addEventListener('submit',e=>{e.preventDefault();const old=$('oldPassword').value,nw=$('newPassword').value,cf=$('confirmPassword').value;if(nw!==cf){toast('كلمتا المرور غير متطابقتين.',true);return;}rpc('apiChangePassword',[token,old,nw],()=>{toast('تم تغيير كلمة المرور بنجاح.');$('passwordForm').reset();if(forcePassword){forcePassword=false;loadData();}else{showOnly('appScreen');}});});
-  function openPasswordChange(){forcePassword=false;$('passwordForm').reset();showOnly('passwordScreen');}
+  function showOnly(screen){['loginScreen','appScreen'].forEach(id=>$(id).classList.toggle('hidden',id!==screen));}
+  function logout(showMessage=true){if(token)rpc('apiLogout',[token],()=>{},true);token='';appData=null;localStorage.removeItem('rr_mobile_token');showOnly('loginScreen');$('mobileActivationCode').value='';if(showMessage)toast('تم تسجيل الخروج من هذا الجهاز. لإعادة الدخول اطلب رمز تفعيل جديدًا من المسؤول.');}
+  $('loginForm').addEventListener('submit',e=>{e.preventDefault();const id=$('loginId').value.trim(),code=$('mobileActivationCode').value.trim().toUpperCase();rpc('apiMobileActivate',[id,code],res=>{token=res.token;localStorage.setItem('rr_mobile_token',token);$('mobileActivationCode').value='';toast('تم تفعيل هذا الجهاز.');loadData();});});
   function loadData(){if(!token){showOnly('loginScreen');return;}rpc('apiGetData',[token],data=>{appData=data;showOnly('appScreen');$('userLabel').textContent=data.user.name+' · '+data.user.id+' · '+(data.user.role==='ADMIN'?'مسؤول':'موظف');$('navAdmin').classList.toggle('hidden',data.user.role!=='ADMIN');renderAll();});}
   function showTab(tab){$('bookingsTab').classList.toggle('hidden',tab!=='bookings');$('adminTab').classList.toggle('hidden',tab!=='admin');$('navBookings').classList.toggle('active',tab==='bookings');$('navNew').classList.remove('active');$('navAdmin').classList.toggle('active',tab==='admin');if(tab==='admin'&&appData.user.role!=='ADMIN'){toast('هذه الصفحة للمسؤول فقط.',true);showTab('bookings');}}
   function renderAll(){renderStats();fillBookingSelects();renderBookings();if(appData.user.role==='ADMIN')renderAdmin();if(!$('bookingDate').value)$('bookingDate').value=appData.today||new Date().toISOString().slice(0,10);}
