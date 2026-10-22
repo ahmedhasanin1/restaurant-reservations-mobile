@@ -41,7 +41,7 @@
   </section>
 
   <section id="appScreen" class="hidden">
-    <header class="topbar"><div class="topinner"><div class="brand"><div class="brandmark">R</div><div><div>Romantic</div><div style="font-size:11px;font-weight:400;color:#d4e1ec">إدارة حجوزات العشاء الرومانسي</div></div></div><div class="userbox"><span id="userLabel"></span><button class="secondary small" onclick="openPinChange()">تغيير الرقم السري</button><button class="danger small" onclick="logout()">خروج</button></div></div></header>
+    <header class="topbar"><div class="topinner"><div class="brand"><div class="brandmark">R</div><div><div>Romantic</div><div style="font-size:11px;font-weight:400;color:#d4e1ec">إدارة حجوزات العشاء الرومانسي</div></div></div><div class="userbox"><span id="userLabel"></span><button id="enablePushBtn" class="accent small" type="button" onclick="enablePushNotifications()">تفعيل إشعارات الهاتف</button><button class="secondary small" onclick="openPinChange()">تغيير الرقم السري</button><button class="danger small" onclick="logout()">خروج</button></div></div></header>
     <main class="wrap">
       <div class="nav"><button id="navBookings" class="active" onclick="showTab('bookings')">الحجوزات</button><button id="navNew" onclick="newReservation()">＋ حجز جديد</button><button id="navAdmin" class="hidden" onclick="showTab('admin')">إدارة النظام</button></div>
       <section id="bookingsTab">
@@ -74,12 +74,17 @@
 
   <section id="pinScreen" class="login hidden"><div class="card"><div class="login-logo"><div class="brandmark">🔐</div><div><h1 id="pinScreenTitle">تغيير الرقم السري</h1><div id="pinScreenHelp" class="muted">أدخل الرقم الحالي ثم رقمًا جديدًا من 4 أرقام.</div></div></div><form id="pinForm"><div class="field"><label for="oldPin">الرقم السري الحالي</label><input id="oldPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="current-password" required></div><div class="field" style="margin-top:10px"><label for="newPin">الرقم السري الجديد</label><input id="newPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="new-password" required></div><div class="field" style="margin-top:10px"><label for="confirmNewPin">تأكيد الرقم السري الجديد</label><input id="confirmNewPin" type="password" inputmode="numeric" pattern="[0-9]{4}" minlength="4" maxlength="4" autocomplete="new-password" required></div><div class="actions"><button class="primary" type="submit">حفظ الرقم السري</button><button id="cancelPinChange" class="secondary" type="button" onclick="cancelPinChange()">إلغاء</button></div></form></div></section>
 
+<script src="./firebase-config.js"></script>
 <script src="./config.js"></script>
 <script>
   let token = sessionStorage.getItem('rr_token') || '';
   let appData = null;
   let toastTimer = null;
   let forcePinChange = false;
+  let messagingClient = null;
+  let firebaseSdkPromise = null;
+  let pushSyncAttempted = false;
+  let pushRegisteredThisPage = false;
   const $ = id => document.getElementById(id);
   function esc(v){return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
   function toast(message,isError=false){const el=$('toast');el.textContent=message;el.classList.remove('hidden','error');if(isError)el.classList.add('error');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.add('hidden'),6000);}
@@ -166,8 +171,90 @@
       forcePinChange=false; appData=data; showOnly('appScreen');
       $('userLabel').textContent=data.user.name+' · '+data.user.id+' · '+(data.user.role==='ADMIN'?'مسؤول':'موظف');
       $('navAdmin').classList.toggle('hidden',data.user.role!=='ADMIN'); renderAll();
+      syncPushIfAlreadyGranted();
     });
   }
+  // Firebase Cloud Messaging: opt-in only. Core booking functions do not depend on push setup.
+  function pushConfig(){return window.ROMANTIC_FIREBASE_CONFIG || null;}
+  function pushConfigReady(){
+    const c=pushConfig();
+    return !!(c && c.apiKey && c.projectId && c.messagingSenderId && c.appId && c.vapidKey &&
+      !String(c.apiKey).includes('PASTE_') && !String(c.projectId).includes('YOUR_') && !String(c.vapidKey).includes('PASTE_'));
+  }
+  function loadFirebaseSdk_(){
+    if(window.firebase && firebase.messaging) return Promise.resolve();
+    if(firebaseSdkPromise) return firebaseSdkPromise;
+    const loadScript = src => new Promise((resolve,reject)=>{
+      const script=document.createElement('script'); script.src=src; script.async=true;
+      script.onload=resolve; script.onerror=()=>reject(new Error('تعذر تحميل مكون إشعارات Firebase. تحقق من الاتصال بالإنترنت.'));
+      document.head.appendChild(script);
+    });
+    firebaseSdkPromise=loadScript('https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js')
+      .then(()=>loadScript('https://www.gstatic.com/firebasejs/10.13.2/firebase-messaging-compat.js'));
+    return firebaseSdkPromise;
+  }
+  function getFirebaseMessaging(){
+    if(!pushConfigReady()) throw new Error('لم يتم إعداد firebase-config.js بقيم Firebase الحقيقية.');
+    if(!window.firebase || !firebase.messaging) throw new Error('تعذر تحميل Firebase Messaging من Google. تحقق من اتصال الإنترنت.');
+    if(!firebase.apps.length){
+      const c=pushConfig();
+      firebase.initializeApp({apiKey:c.apiKey,authDomain:c.authDomain,projectId:c.projectId,messagingSenderId:c.messagingSenderId,appId:c.appId,storageBucket:c.storageBucket||undefined});
+    }
+    if(!messagingClient) messagingClient=firebase.messaging();
+    if(!messagingClient.__romanticOnMessageBound){
+      messagingClient.onMessage(payload=>{
+        const d=(payload&&payload.data)||{};
+        const title=d.title||'إشعار Romantic';
+        const body=d.body||'وصل إشعار جديد.';
+        toast(title+'\n'+body);
+        if('Notification' in window && Notification.permission==='granted' && 'serviceWorker' in navigator){
+          navigator.serviceWorker.ready.then(reg=>reg.showNotification(title,{
+            body:body,
+            icon:'./icons/romantic-192.png',
+            tag:d.eventId||('romantic-'+Date.now()),
+            renotify:false,
+            data:{url:d.url||'./'}
+          })).catch(err=>console.warn('Could not show foreground system notification:',err));
+        }
+      });
+      messagingClient.__romanticOnMessageBound=true;
+    }
+    return messagingClient;
+  }
+  async function registerCurrentDeviceForPush(showSuccess){
+    if(!token) throw new Error('سجّل الدخول أولًا.');
+    if(!('Notification' in window) || !('serviceWorker' in navigator)) throw new Error('هذا المتصفح لا يدعم إشعارات الويب المطلوبة. جرّب Chrome على Android.');
+    if(Notification.permission!=='granted') throw new Error('لم يتم السماح بالإشعارات على هذا الهاتف. اضغط تفعيل الإشعارات ووافق على الطلب.');
+    const cfg=pushConfig();
+    await loadFirebaseSdk_();
+    const swRegistration=await navigator.serviceWorker.register('./sw.js');
+    await navigator.serviceWorker.ready;
+    const messaging=getFirebaseMessaging();
+    const fcmToken=await messaging.getToken({vapidKey:cfg.vapidKey,serviceWorkerRegistration:swRegistration});
+    if(!fcmToken) throw new Error('لم يتم إنشاء رمز إشعارات لهذا الهاتف.');
+    callApi('apiRegisterPushToken',[token,fcmToken,navigator.userAgent],res=>{
+      pushRegisteredThisPage=true;
+      const btn=$('enablePushBtn'); if(btn)btn.textContent='إشعارات الهاتف مفعّلة';
+      if(showSuccess)toast('تم تفعيل إشعارات Romantic على هذا الهاتف.');
+    });
+  }
+  async function enablePushNotifications(){
+    try{
+      if(!token){toast('سجّل الدخول أولًا.',true);return;}
+      if(!pushConfigReady()){toast('يلزم إكمال إعداد Firebase في firebase-config.js أولًا.',true);return;}
+      if(!('Notification' in window) || !('serviceWorker' in navigator)){toast('هذا المتصفح لا يدعم إشعارات الويب. استخدم Chrome على Android.',true);return;}
+      let permission=Notification.permission;
+      if(permission!=='granted') permission=await Notification.requestPermission();
+      if(permission!=='granted'){toast('لم تسمح بإشعارات Romantic. يمكنك تفعيلها من إعدادات الموقع.',true);return;}
+      await registerCurrentDeviceForPush(true);
+    }catch(err){toast((err&&err.message)||String(err),true);}
+  }
+  function syncPushIfAlreadyGranted(){
+    if(pushSyncAttempted || !token || !pushConfigReady() || !('Notification' in window) || Notification.permission!=='granted') return;
+    pushSyncAttempted=true;
+    registerCurrentDeviceForPush(false).catch(err=>console.warn('Romantic push sync failed:',err));
+  }
+
   function showTab(tab){
     if(tab==='admin'&&(!appData||appData.user.role!=='ADMIN')){toast('لوحة الإدارة للمسؤول فقط.',true);return;}
     $('bookingsTab').classList.toggle('hidden',tab!=='bookings');
